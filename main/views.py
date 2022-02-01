@@ -3,10 +3,10 @@ from django.http import HttpResponse
 
 # Create your views here.
 def blog_home(request):
-    return HttpResponse("Blog home")
+    return render(request, "main/blog_home.html")
 
 def blog_detail(request):
-    return HttpResponse("Blog detail")
+    return render(request, "main/blog_detail.html")
 
 def profile(request):
-    return HttpResponse("User Profile")
+    return render(request, "main/profile.html")
