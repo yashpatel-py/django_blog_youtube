@@ -10,3 +10,6 @@ def blog_detail(request):
 
 def profile(request):
     return render(request, "main/profile.html")
+
+def contactUs(request):
+    return render(request, "main/contact_us.html")
