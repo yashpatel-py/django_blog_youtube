@@ -1,5 +1,62 @@
-<a href="{% url 'home' %}">Home</a>
-<a href="{% url 'blog_detail' %}">Blog Detail</a>
-<a href="{% url 'user_profile' %}">Profile</a>
+{% extends 'base.html' %}
 
-<h1>Blog Detail</h1>
+{% block content %}
+<dev class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h2>
+            <span>Author: Yash Patel</span>
+            <div>
+                <small>12 min ago</small>
+            </div>
+
+            <img src="https://images.pexels.com/photos/11013073/pexels-photo-11013073.jpeg?cs=srgb&dl=pexels-anil-singh-11013073.jpg&fm=jpg"
+                alt="" width="40%">
+
+            <div>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui necessitatibus veniam quia, tempore, cum
+                    nobis veritatis laboriosam quam dolor, neque atque. Saepe, sit? Sit impedit vero recusandae, veniam
+                    magnam molestiae quod nobis architecto officiis enim sapiente omnis nam laboriosam mollitia atque
+                    odit veritatis voluptates explicabo perferendis itaque ullam. Dolores dicta placeat deleniti
+                    quisquam optio dignissimos labore quod aspernatur commodi excepturi quidem ratione, doloribus
+                    distinctio, mollitia sequi numquam velit voluptate eius hic? Cupiditate earum repellendus
+                    exercitationem commodi eius? Corporis totam quasi cupiditate expedita modi quaerat error eligendi
+                    numquam ducimus nostrum saepe qui itaque ipsum dicta laboriosam, nulla quibusdam veritatis ea nemo
+                    excepturi cum culpa? Voluptatum laudantium culpa nihil eveniet hic minima nulla asperiores modi
+                    dolorum dignissimos? Voluptate rerum doloremque, fugiat quod ducimus quos. Ratione, dolore minima?
+                    Quod reprehenderit modi ab sit voluptate debitis voluptates, autem eius qui id, aspernatur tempore
+                    officia omnis eaque dolorum recusandae? Iure quasi, exercitationem similique expedita ea modi
+                    molestiae veniam eius veritatis reprehenderit adipisci repellendus tempore unde sapiente provident
+                    labore delectus quam quos officiis quaerat! Placeat culpa provident consequuntur accusamus unde,
+                    dolorum illo nam at impedit voluptatem commodi iste animi nostrum praesentium asperiores quaerat!
+                    Libero saepe natus, quo ut sed odio! Unde, voluptas atque? Reprehenderit laboriosam cupiditate sint
+                    voluptas adipisci. Doloremque facilis tempore quisquam amet corporis. Dicta voluptates architecto
+                    officiis ipsum molestiae laboriosam, praesentium sint cupiditate optio laborum, commodi vel nihil.
+                    Veritatis, iure, qui harum officiis facilis, asperiores quibusdam fugit velit voluptatum corrupti
+                    expedita ut. Tenetur ratione tempora, consectetur non qui voluptatibus repellendus quo ad suscipit
+                    et distinctio debitis a commodi eos repellat praesentium quam fugiat officia culpa adipisci magni
+                    expedita sunt eligendi nam! Quam, esse vero praesentium iure possimus ipsam nulla, harum repudiandae
+                    nihil fuga, itaque sunt vel laudantium at! Fuga in, officia ab laboriosam, illum hic voluptate
+                    commodi suscipit qui tempore nemo placeat corrupti deserunt voluptates? Modi amet ea id cum, at
+                    cumque ducimus non tempora minus assumenda quam voluptatum sed animi veritatis nostrum, alias
+                    eligendi soluta excepturi reprehenderit blanditiis odio. Magnam perspiciatis assumenda fugiat non
+                    sed. Eum, esse neque. Incidunt maiores facere consectetur atque suscipit nulla amet culpa ullam,
+                    modi voluptatibus, similique magni placeat et perspiciatis fuga facilis doloremque. Blanditiis,
+                    ipsam asperiores fugit sequi obcaecati temporibus debitis quibusdam eos nam quia architecto libero
+                    quisquam, aperiam et laudantium nobis! Non quam eaque architecto consequatur temporibus maiores
+                    nostrum ad maxime libero cum amet harum iusto quod rem minima reprehenderit omnis, obcaecati
+                    quibusdam nesciunt! Minus, qui nisi!</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <ul class="list-group">
+                <li class="list-group-item">An item</li>
+                <li class="list-group-item">A second item</li>
+                <li class="list-group-item">A third item</li>
+                <li class="list-group-item">A fourth item</li>
+                <li class="list-group-item">And a fifth one</li>
+            </ul>
+        </div>
+    </div>
+</dev>
+{% endblock content %}

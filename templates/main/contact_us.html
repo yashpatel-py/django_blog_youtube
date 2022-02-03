@@ -1,1 +1,29 @@
-<h1>contact Us</h1>
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Contact to DE Blog</h2>
+<form class="row g-3">
+    <div class="col-md-6">
+        <label for="fname" class="form-label">First name</label>
+        <input type="text" class="form-control" id="fname" placeholder="Yash">
+    </div>
+    <div class="col-md-6">
+        <label for="lname" class="form-label">Last name</label>
+        <input type="text" class="form-control" id="lname" placeholder="Patel">
+    </div>
+    <div class="col-md-6">
+        <label for="emailid" class="form-label">Email</label>
+        <input type="email" class="form-control" id="emailid" placeholder="example@gmail.com">
+    </div>
+    <div class="col-md-6">
+        <label for="phone" class="form-label">Phone Number</label>
+        <input type="number" class="form-control" id="phone" placeholder="Phone number">
+    </div>
+    <div class="col-12">
+        <textarea class="form-control" name="" id="" cols="30" rows="5"></textarea>
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+{% endblock content %}
