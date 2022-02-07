@@ -2,25 +2,19 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-sm-6">
+        {% for data in blogs %}
+        <div class="col-sm-6 mt-1">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.
+                    <h5 class="card-title">{{ data.name }}</h5>
+                    <span class="badge bg-success">{{data.author}}</span>
+                    <p class="card-text">
+                        {{data.description| truncatechars:100}}
                     </p>
                     <a href="{% url 'blog_detail' %}" class="btn btn-primary">Read More</a>
                 </div>
             </div>
         </div>
-        <div class="col-sm-6">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.
-                    </p>
-                    <a href="{% url 'blog_detail' %}" class="btn btn-primary">Read More</a>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 {% endblock content %}
