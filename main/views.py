@@ -9,8 +9,12 @@ def blog_home(request):
     }
     return render(request, "main/blog_home.html", context)
 
-def blog_detail(request):
-    return render(request, "main/blog_detail.html")
+def blog_detail(request, slug_url):
+    blog = Blog.objects.get(slug=slug_url)
+    context = {
+        'blog':blog
+    }
+    return render(request, "main/blog_detail.html", context)
 
 def profile(request):
     return render(request, "main/profile.html")

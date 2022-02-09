@@ -11,7 +11,7 @@
                     <p class="card-text">
                         {{data.description| truncatechars:100}}
                     </p>
-                    <a href="{% url 'blog_detail' %}" class="btn btn-primary">Read More</a>
+                    <a href="{% url 'blog_detail' data.slug %}" class="btn btn-primary">Read More</a>
                 </div>
             </div>
         </div>
