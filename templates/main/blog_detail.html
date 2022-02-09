@@ -20,7 +20,9 @@
         <div class="col-md-4">
             <ul class="list-group">
                 {% for blogs in all_blogs %}
-                    <li class="list-group-item">{{blogs.name}}</li>
+                    <li class="list-group-item">
+                        <a href="{% url 'blog_detail' blogs.slug %}" class="text-decoration-none">{{blogs.name}}</a>
+                    </li>
                 {% endfor %}
             </ul>
         </div>
