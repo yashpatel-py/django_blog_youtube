@@ -1,5 +1,7 @@
-from django.shortcuts import render
-from .models import Blog, BlogComment
+from django.shortcuts import redirect, render
+from .models import Blog, BlogComment, Contact
+from .forms import ContactForm
+from django.contrib import messages
 
 # Create your views here.
 def blog_home(request):
@@ -22,4 +24,12 @@ def profile(request):
     return render(request, "main/profile.html")
 
 def contactUs(request):
-    return render(request, "main/contact_us.html")
+    form = ContactForm()
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "your form is submitted successfully")
+    else:
+        form = ContactForm()
+    return render(request, "main/contact_us.html", {"form": form})

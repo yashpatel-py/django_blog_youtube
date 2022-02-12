@@ -2,25 +2,27 @@
 
 {% block content %}
 <h2>Contact to DE Blog</h2>
-<form class="row g-3">
+<form class="row g-3" method="post">
+    {% csrf_token %}
     <div class="col-md-6">
         <label for="fname" class="form-label">First name</label>
-        <input type="text" class="form-control" id="fname" placeholder="Yash">
+        {{form.first_name}}
     </div>
     <div class="col-md-6">
         <label for="lname" class="form-label">Last name</label>
-        <input type="text" class="form-control" id="lname" placeholder="Patel">
+        {{form.last_name}}
     </div>
     <div class="col-md-6">
         <label for="emailid" class="form-label">Email</label>
-        <input type="email" class="form-control" id="emailid" placeholder="example@gmail.com">
+        {{form.e_mail}}
     </div>
     <div class="col-md-6">
         <label for="phone" class="form-label">Phone Number</label>
-        <input type="number" class="form-control" id="phone" placeholder="Phone number">
+        {{form.phone_number}}
     </div>
     <div class="col-12">
-        <textarea class="form-control" name="" id="" cols="30" rows="5"></textarea>
+        <label for="phone" class="form-label">Your Message</label>
+        {{form.contact_message}}
     </div>
     <div class="col-12">
         <button type="submit" class="btn btn-primary">Submit</button>

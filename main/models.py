@@ -27,3 +27,11 @@ class BlogComment(models.Model):
 
     def __str__(self):
         return str(self.blog)
+
+class Contact(models.Model):
+    first_name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
+    e_mail = models.EmailField(max_length=250)
+    phone_number = models.IntegerField()
+    contact_message = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True, blank=True)
