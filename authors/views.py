@@ -8,8 +8,10 @@ def signUp(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-        messages.success(request, "Your account is created successfully")
-        return redirect('home')
+            messages.success(request, "Your account is created successfully")
+            return redirect('home')
+        else:
+            messages.error(request, "Error")
     else:
         form = UserCreationForm()
     return render(request, "authors/register.html", {'form': form})
