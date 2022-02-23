@@ -5,9 +5,32 @@
 
 <form method="post">
     {% csrf_token %}
-
-    {{form}}
-
-    <button type="submit">Create User</button>
-</form>
+    <div class="row">
+            <div class="col-md-6">
+                <label for="fname" class="form-label">First Name</label>
+                {{form.first_name}}
+            </div>
+            <div class="col-md-6">
+                <label for="lname" class="form-label">Last Name</label>
+                {{form.last_name}}
+            </div>
+            <div class="col-6">
+                <label for="username" class="form-label">Username</label>
+                {{form.username}}
+            </div>
+            <div class="col-6">
+                <label for="inputAddress2" class="form-label">E-mail</label>
+                {{form.email}}
+            </div>
+            <div class="col-12">
+                <label for="password" class="form-label">Password</label>
+                {{form.password1}}
+            </div>
+            <div class="col-12">
+                <label for="confirm password" class="form-label">Confirm password</label>
+                {{form.password2}}
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Create User</button>
+    </form>
 {% endblock content %}
