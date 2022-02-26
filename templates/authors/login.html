@@ -5,8 +5,9 @@
 
 <form method="post">
     {% csrf_token %}
+
     {{login_form}}
 
-    <button type="submit" class="btn btn-primary">Login</button>
+    <button type="submit" class="btn btn-primary mt-3">Login</button>
 </form>
 {% endblock content %}

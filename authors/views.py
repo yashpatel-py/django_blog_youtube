@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
-from .forms import SignupForm
+from .forms import SignupForm, LoginUserForm
 from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
@@ -26,7 +26,7 @@ def signUp(request):
 
 def logIn(request):
     if request.method == "POST":
-        form = AuthenticationForm(request, data = request.POST)
+        form = LoginUserForm(request, data = request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
@@ -41,7 +41,7 @@ def logIn(request):
                 messages.error(request, "Error")
         else:
             messages.error(request, "Username or password incorrect")
-    form = AuthenticationForm()
+    form = LoginUserForm()
     return render(request, "authors/login.html", {"login_form": form})
 
 def logOut(request):
