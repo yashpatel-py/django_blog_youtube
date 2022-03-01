@@ -15,7 +15,7 @@
                     {% else %}
                     class="nav-link"
                     {% endif %}
-                    aria-current="page" href="{% url 'home' %}">Home</a>
+                    aria-current="page" href="{% url 'home' %}"><i class="fa-solid fa-house"></i> Home</a>
                 </li>
                 <li class="nav-item">
                     <a 
@@ -24,17 +24,17 @@
                     {% else %}
                         class="nav-link" 
                     {% endif %}
-                    href="{% url 'contact_us' %}">Contact Us</a>
+                    href="{% url 'contact_us' %}"><i class="fa-solid fa-address-book"></i> Contact Us</a>
                 </li>
             </ul>
         </div>
         <ul class="navbar-nav mb-2 mb-lg-0">
             {% if user.is_authenticated %}
             <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#">{{user.username}}</a>
+                <a class="nav-link" aria-current="page" href="#"><i class="fa-solid fa-user"></i> {{user.username}}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{% url 'logout' %}">Logout</a>
+                <a class="nav-link" aria-current="page" href="{% url 'logout' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
             </li>
 
             {% else %}
@@ -45,7 +45,7 @@
                 {% else %}
                     class="nav-link" 
                 {% endif %}
-                aria-current="page" href="{% url 'login' %}">Login</a>
+                aria-current="page" href="{% url 'login' %}"> <i class="fa-solid fa-arrow-right-to-bracket"></i> Login</a>
             </li>
             <li class="nav-item">
                 <a 
@@ -54,7 +54,7 @@
                 {% else %}
                     class="nav-link" 
                 {% endif %}
-                aria-current="page" href="{% url 'register' %}">Signup</a>
+                aria-current="page" href="{% url 'register' %}"><i class="fa-solid fa-user-plus fa-lg"></i> Signup</a>
             </li>
             {% endif %}
         </ul>
