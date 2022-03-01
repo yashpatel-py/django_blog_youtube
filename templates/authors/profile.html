@@ -43,9 +43,9 @@
     {% endif %}
 </div>
 <div class="card-footer bg-transparent border-success">
-    <a class="btn btn-sm btn-primary" href="#">Change Password</a>
-    <a class="btn btn-sm btn-info" href="#">Edit Profile</a>
-    <a class="btn btn-sm btn-danger" href="#">Delete Account</a>
+    <a class="btn btn-sm btn-primary" href="#"><i class="fa-solid fa-lock"></i> Change Password</a>
+    <a class="btn btn-sm btn-info" href="#"><i class="fa-solid fa-user-pen"></i> Edit Profile</a>
+    <a class="btn btn-sm btn-danger" href="#"><i class="fa-solid fa-user-slash"></i> Delete Account</a>
 </div>
 </div>
 
@@ -63,16 +63,16 @@
                 </div>
 
                 <div class="col-md-6">
-                    <p class="text-end">{{post_data.post_date|timesince}}</p>
+                    <p class="text-end"><i class="fa-solid fa-clock"></i> {{post_data.post_date|timesince}}</p>
                 </div>
             </div>
             <footer class="blockquote-footer">{{post_data.description |truncatewords:20}}</footer>
         </blockquote>
     </div>
     <div class="card-footer">
-        <a class="btn btn-sm btn-primary" href="#">Read Blog</a>
-        <a class="btn btn-sm btn-info" href="#">Edit Blog</a>
-        <a class="btn btn-sm btn-danger" href="#">Delete Blog</a>
+        <a class="btn btn-sm btn-primary" href="{% url 'blog_detail' post_data.slug %}"><i class="fa-brands fa-readme"></i> Read Blog</a>
+        <a class="btn btn-sm btn-info" href="#"><i class="fa-solid fa-pen-to-square"></i> Edit Blog</a>
+        <a class="btn btn-sm btn-danger" href="#"> <i class="fa-solid fa-trash"></i>Delete Blog</a>
     </div>
 </div>
 {% endfor %}
