@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'main',
     'authors',
     'fontawesomefree',
+    "django.contrib.humanize",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
 from .forms import SignupForm, LoginUserForm
 from django.contrib.auth import authenticate, login, logout
+from main.models import Blog
 
 # Create your views here.
 def signUp(request):
@@ -48,3 +49,10 @@ def logOut(request):
     logout(request)
     messages.success(request, "You have successfully logged out.")
     return redirect('home')
+
+def profile(request, user_name):
+    user_related_data = Blog.objects.filter(author__username = user_name)
+    context = {
+        "user_related_data": user_related_data
+    }
+    return render(request, "authors/profile.html", context)

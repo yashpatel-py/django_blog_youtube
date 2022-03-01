@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block content %}
+<div class="card border-success mb-3"">
+    <div class=" card-header bg-transparent border-success fs-4">{{user.username}}'s Profile</div>
+<div class="card-body">
+    <!-- Check Username -->
+    {% if user.username %}
+    <p class="card-text">Username: {{user.username}}</p>
+    {% else %}
+    <div class="alert alert-warning" role="alert">
+        <b>Username</b> is not provided by user
+    </div>
+    {% endif %}
+
+    <!--check first_name-->
+    {% if user.first_name %}
+    <p class="card-text">First Name: {{user.first_name}}</p>
+    {% else %}
+    <div class="alert alert-warning" role="alert">
+        <b>First name</b> is not provided by user
+    </div>
+    {% endif %}
+
+    <!-- Last name -->
+    {% if user.last_name %}
+    <p class="card-text">First Name: {{user.last_name}}</p>
+    {% else %}
+    <div class="alert alert-warning" role="alert">
+        <b>Last name</b> is not provided by user
+    </div>
+    {% endif %}
+
+    <!-- check Email -->
+
+    {% if user.email %}
+    <p class="card-text">Email: {{user.email}}</p>
+    {% else %}
+    <div class="alert alert-warning" role="alert">
+        <b>Email</b> is not provided by user
+    </div>
+    {% endif %}
+</div>
+<div class="card-footer bg-transparent border-success">
+    <a class="btn btn-sm btn-primary" href="#">Change Password</a>
+    <a class="btn btn-sm btn-info" href="#">Edit Profile</a>
+    <a class="btn btn-sm btn-danger" href="#">Delete Account</a>
+</div>
+</div>
+
+<hr>
+
+<h3>My Posts</h3>
+
+{% for post_data in user_related_data %}
+<div class="card">
+    <div class="card-body">
+        <blockquote class="blockquote mb-0">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>{{post_data.name}}</p>
+                </div>
+
+                <div class="col-md-6">
+                    <p class="text-end">{{post_data.post_date|timesince}}</p>
+                </div>
+            </div>
+            <footer class="blockquote-footer">{{post_data.description |truncatewords:20}}</footer>
+        </blockquote>
+    </div>
+    <div class="card-footer">
+        <a class="btn btn-sm btn-primary" href="#">Read Blog</a>
+        <a class="btn btn-sm btn-info" href="#">Edit Blog</a>
+        <a class="btn btn-sm btn-danger" href="#">Delete Blog</a>
+    </div>
+</div>
+{% endfor %}
+{% endblock content %}
