@@ -1,8 +1,11 @@
+from audioop import reverse
 from django.shortcuts import redirect, render
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
-from .forms import SignupForm, LoginUserForm
+from django.urls import reverse_lazy
+from .forms import SignupForm, LoginUserForm, PasswordChangingForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.views import PasswordChangeView
 from main.models import Blog
 
 # Create your views here.
@@ -56,3 +59,10 @@ def profile(request, user_name):
         "user_related_data": user_related_data
     }
     return render(request, "authors/profile.html", context)
+
+class PasswordChangeView(PasswordChangeView):
+    form_class = PasswordChangingForm
+    success_url = reverse_lazy('password_success')
+    
+def password_success(request):
+    return render(request, "authors/password_change_success.html")

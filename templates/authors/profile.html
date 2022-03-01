@@ -43,7 +43,7 @@
     {% endif %}
 </div>
 <div class="card-footer bg-transparent border-success">
-    <a class="btn btn-sm btn-primary" href="#"><i class="fa-solid fa-lock"></i> Change Password</a>
+    <a class="btn btn-sm btn-primary" href="{% url 'change-password' %}"><i class="fa-solid fa-lock"></i> Change Password</a>
     <a class="btn btn-sm btn-info" href="#"><i class="fa-solid fa-user-pen"></i> Edit Profile</a>
     <a class="btn btn-sm btn-danger" href="#"><i class="fa-solid fa-user-slash"></i> Delete Account</a>
 </div>
@@ -54,7 +54,7 @@
 <h3>My Posts</h3>
 
 {% for post_data in user_related_data %}
-<div class="card">
+<div class="card mt-1">
     <div class="card-body">
         <blockquote class="blockquote mb-0">
             <div class="row">
