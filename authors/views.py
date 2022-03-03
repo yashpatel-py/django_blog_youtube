@@ -3,10 +3,11 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
 from django.urls import reverse_lazy
-from .forms import SignupForm, LoginUserForm, PasswordChangingForm
+from .forms import SignupForm, LoginUserForm, PasswordChangingForm, EditUserProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import PasswordChangeView
 from main.models import Blog
+from django.views import generic
 
 # Create your views here.
 def signUp(request):
@@ -66,3 +67,12 @@ class PasswordChangeView(PasswordChangeView):
     
 def password_success(request):
     return render(request, "authors/password_change_success.html")
+
+
+class UpdateUserView(generic.UpdateView):
+    form_class = EditUserProfileForm
+    template_name = "authors/edit_user_profile.html"
+    success_url = reverse_lazy('home')
+    
+    def get_object(slef):
+        return slef.request.user
