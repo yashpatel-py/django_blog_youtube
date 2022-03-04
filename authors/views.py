@@ -10,56 +10,105 @@ from main.models import Blog
 from django.views import generic
 
 # Create your views here.
-def signUp(request):
-    if request.method == "POST":
-        form = SignupForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Your account is created successfully")
-            new_user = authenticate(
-                username = form.cleaned_data['username'],
-                password = form.cleaned_data['password1']
-            )
+# def signUp(request):
+#     if request.method == "POST":
+#         form = SignupForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, "Your account is created successfully")
+#             new_user = authenticate(
+#                 username = form.cleaned_data['username'],
+#                 password = form.cleaned_data['password1']
+#             )
             
-            login(request, new_user)
-            return redirect('home')
-        else:
-            messages.error(request, "Error")
-    else:
-        form = SignupForm()
-    return render(request, "authors/register.html", {'form': form})
+#             login(request, new_user)
+#             return redirect('home')
+#         else:
+#             messages.error(request, "Error")
+#     else:
+#         form = SignupForm()
+#     return render(request, "authors/register.html", {'form': form})
 
-def logIn(request):
-    if request.method == "POST":
-        form = LoginUserForm(request, data = request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
+class signUp(generic.CreateView):
+    form_class = SignupForm
+    template_name = "authors/register.html"
+    success_url = reverse_lazy('login')
+
+# def logIn(request):
+#     if request.method == "POST":
+#         form = LoginUserForm(request, data = request.POST)
+#         if form.is_valid():
+#             username = form.cleaned_data.get('username')
+#             password = form.cleaned_data.get('password')
             
-            user = authenticate(username = username, password=password)
+#             user = authenticate(username = username, password=password)
             
-            if user is not None:
-                login(request, user)
-                messages.success(request, f"You are logged in as {username}")
-                return redirect('home')
+#             if user is not None:
+#                 login(request, user)
+#                 messages.success(request, f"You are logged in as {username}")
+#                 return redirect('home')
+#             else:
+#                 messages.error(request, "Error")
+#         else:
+#             messages.error(request, "Username or password incorrect")
+#     form = LoginUserForm()
+#     return render(request, "authors/login.html", {"login_form": form})
+
+class logIn(generic.View):
+    form_class = LoginUserForm
+    template_name = "authors/login.html"
+    
+    def get(self, request):
+        form = self.form_class
+        return render(request, self.template_name, {'form': form})
+    
+    def post(self, request):
+        if request.method == "POST":
+            form = LoginUserForm(request, data = request.POST)
+            if form.is_valid():
+                username = form.cleaned_data.get('username')
+                password = form.cleaned_data.get('password')
+                
+                user = authenticate(username = username, password=password)
+                
+                if user is not None:
+                    login(request, user)
+                    messages.success(request, f"You are logged in as {username}")
+                    return redirect('home')
+                else:
+                    messages.error(request, "Error")
             else:
-                messages.error(request, "Error")
-        else:
-            messages.error(request, "Username or password incorrect")
-    form = LoginUserForm()
-    return render(request, "authors/login.html", {"login_form": form})
+                messages.error(request, "Username or password incorrect")
+        form = LoginUserForm()
+        return render(request, "authors/login.html", {"form": form})
 
-def logOut(request):
-    logout(request)
-    messages.success(request, "You have successfully logged out.")
-    return redirect('home')
+# def logOut(request):
+#     logout(request)
+#     messages.success(request, "You have successfully logged out.")
+#     return redirect('home')
 
-def profile(request, user_name):
-    user_related_data = Blog.objects.filter(author__username = user_name)
-    context = {
-        "user_related_data": user_related_data
-    }
-    return render(request, "authors/profile.html", context)
+class logOut(generic.View):
+    def get(self, request):
+        logout(request)
+        return redirect('home')
+
+# def profile(request, user_name):
+#     user_related_data = Blog.objects.filter(author__username = user_name)
+#     context = {
+#         "user_related_data": user_related_data
+#     }
+#     return render(request, "authors/profile.html", context)
+
+class profile(generic.View):
+    model = Blog
+    template_name = "authors/profile.html"
+    
+    def get(self, request, user_name):
+        user_related_data = Blog.objects.filter(author__username = user_name)
+        context = {
+            "user_related_data": user_related_data
+        }
+        return render(request, self.template_name, context)
 
 class PasswordChangeView(PasswordChangeView):
     form_class = PasswordChangingForm
