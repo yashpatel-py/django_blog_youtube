@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import PasswordChangeView
 from main.models import Blog
 from django.views import generic
+from django.contrib.messages.views import SuccessMessageMixin
 
 # Create your views here.
 # def signUp(request):
@@ -29,10 +30,15 @@ from django.views import generic
 #         form = SignupForm()
 #     return render(request, "authors/register.html", {'form': form})
 
-class signUp(generic.CreateView):
+class signUp(SuccessMessageMixin, generic.CreateView):
     form_class = SignupForm
     template_name = "authors/register.html"
     success_url = reverse_lazy('login')
+    success_message = "User has been created, please login with your username and password"
+    
+    def form_invalid(self, form):
+        messages.add_message(self.request, messages.ERROR, "Please enter details properly")
+        return redirect('home')
 
 # def logIn(request):
 #     if request.method == "POST":
@@ -90,6 +96,7 @@ class logIn(generic.View):
 class logOut(generic.View):
     def get(self, request):
         logout(request)
+        messages.success(request, "User logged out")
         return redirect('home')
 
 # def profile(request, user_name):
@@ -118,10 +125,15 @@ def password_success(request):
     return render(request, "authors/password_change_success.html")
 
 
-class UpdateUserView(generic.UpdateView):
+class UpdateUserView(SuccessMessageMixin, generic.UpdateView):
     form_class = EditUserProfileForm
     template_name = "authors/edit_user_profile.html"
     success_url = reverse_lazy('home')
+    success_message = "User updated"
     
     def get_object(slef):
         return slef.request.user
+    
+    def form_invalid(self, form):
+        messages.add_message(self.request, messages.ERROR, "Please submit the form carefully")
+        return redirect('home')

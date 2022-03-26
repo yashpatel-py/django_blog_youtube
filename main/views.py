@@ -4,6 +4,7 @@ from .models import Blog, BlogComment, Contact
 from .forms import ContactForm
 from django.contrib import messages
 from django.views import generic
+from django.contrib.messages.views import SuccessMessageMixin
 
 # Create your views here.
 # def blog_home(request):
@@ -42,7 +43,12 @@ class blog_detail(generic.DetailView):
 #         form = ContactForm()
 #     return render(request, "main/contact_us.html", {"form": form})
 
-class contactUs(generic.CreateView):
+class contactUs(SuccessMessageMixin, generic.CreateView):
     form_class = ContactForm
     template_name = "main/contact_us.html"
     success_url = "/"
+    success_message = "Your query has been submited successfully, we will contact you soon."
+    
+    def form_invalid(self, form):
+        messages.add_message(self.request, messages.ERROR, "Please submit the form carefully")
+        return redirect('home')
