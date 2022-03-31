@@ -1,4 +1,4 @@
-from audioop import reverse
+import django
 from django.shortcuts import redirect, render
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
@@ -9,6 +9,7 @@ from django.contrib.auth.views import PasswordChangeView
 from main.models import Blog
 from django.views import generic
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.models import User
 
 # Create your views here.
 # def signUp(request):
@@ -21,7 +22,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 #                 username = form.cleaned_data['username'],
 #                 password = form.cleaned_data['password1']
 #             )
-            
+
 #             login(request, new_user)
 #             return redirect('home')
 #         else:
@@ -137,3 +138,9 @@ class UpdateUserView(SuccessMessageMixin, generic.UpdateView):
     def form_invalid(self, form):
         messages.add_message(self.request, messages.ERROR, "Please submit the form carefully")
         return redirect('home')
+    
+class DeleteUser(SuccessMessageMixin, generic.DeleteView):
+    model = User
+    template_name = 'authors/delete_user_confirm.html'
+    success_message = "User has been deleted"
+    success_url = reverse_lazy('home')
