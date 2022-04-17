@@ -10,6 +10,7 @@ from main.models import Blog
 from django.views import generic
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 # def signUp(request):
@@ -47,9 +48,9 @@ class signUp(SuccessMessageMixin, generic.CreateView):
 #         if form.is_valid():
 #             username = form.cleaned_data.get('username')
 #             password = form.cleaned_data.get('password')
-            
+
 #             user = authenticate(username = username, password=password)
-            
+
 #             if user is not None:
 #                 login(request, user)
 #                 messages.success(request, f"You are logged in as {username}")
@@ -94,7 +95,8 @@ class logIn(generic.View):
 #     messages.success(request, "You have successfully logged out.")
 #     return redirect('home')
 
-class logOut(generic.View):
+class logOut(LoginRequiredMixin, generic.View):
+    login_url = 'login'
     def get(self, request):
         logout(request)
         messages.success(request, "User logged out")
@@ -107,8 +109,9 @@ class logOut(generic.View):
 #     }
 #     return render(request, "authors/profile.html", context)
 
-class profile(generic.View):
+class profile(LoginRequiredMixin, generic.View):
     model = Blog
+    login_url = 'login'
     template_name = "authors/profile.html"
     
     def get(self, request, user_name):
@@ -118,16 +121,18 @@ class profile(generic.View):
         }
         return render(request, self.template_name, context)
 
-class PasswordChangeView(PasswordChangeView):
+class PasswordChangeView(LoginRequiredMixin, PasswordChangeView):
     form_class = PasswordChangingForm
+    login_url = 'login'
     success_url = reverse_lazy('password_success')
     
 def password_success(request):
     return render(request, "authors/password_change_success.html")
 
 
-class UpdateUserView(SuccessMessageMixin, generic.UpdateView):
+class UpdateUserView(LoginRequiredMixin, SuccessMessageMixin, generic.UpdateView):
     form_class = EditUserProfileForm
+    login_url = 'login'
     template_name = "authors/edit_user_profile.html"
     success_url = reverse_lazy('home')
     success_message = "User updated"
@@ -139,8 +144,9 @@ class UpdateUserView(SuccessMessageMixin, generic.UpdateView):
         messages.add_message(self.request, messages.ERROR, "Please submit the form carefully")
         return redirect('home')
     
-class DeleteUser(SuccessMessageMixin, generic.DeleteView):
+class DeleteUser(LoginRequiredMixin, SuccessMessageMixin, generic.DeleteView):
     model = User
+    login_url = 'login'
     template_name = 'authors/delete_user_confirm.html'
     success_message = "User has been deleted"
     success_url = reverse_lazy('home')
