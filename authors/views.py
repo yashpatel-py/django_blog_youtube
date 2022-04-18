@@ -11,6 +11,7 @@ from django.views import generic
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 # def signUp(request):
@@ -102,6 +103,7 @@ class logOut(LoginRequiredMixin, generic.View):
         messages.success(request, "User logged out")
         return redirect('home')
 
+# @login_required(login_url="login")
 # def profile(request, user_name):
 #     user_related_data = Blog.objects.filter(author__username = user_name)
 #     context = {
