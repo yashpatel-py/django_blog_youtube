@@ -1,10 +1,11 @@
 from pyexpat import model
 from django.shortcuts import redirect, render
 from .models import Blog, BlogComment, Contact
-from .forms import ContactForm
+from .forms import ContactForm, CreateBlogForm
 from django.contrib import messages
 from django.views import generic
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 # def blog_home(request):
@@ -52,3 +53,10 @@ class contactUs(SuccessMessageMixin, generic.CreateView):
     def form_invalid(self, form):
         messages.add_message(self.request, messages.ERROR, "Please submit the form carefully")
         return redirect('home')
+
+class CreateBlog(LoginRequiredMixin, SuccessMessageMixin, generic.CreateView):
+    form_class = CreateBlogForm
+    template_name = "main/create_blog.html"
+    login_url = 'login'
+    success_url = "/"
+    success_message = "Your blog has been created"

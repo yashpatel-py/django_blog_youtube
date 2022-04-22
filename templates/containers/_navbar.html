@@ -17,6 +17,19 @@
                     {% endif %}
                     aria-current="page" href="{% url 'home' %}"><i class="fa-solid fa-house"></i> Home</a>
                 </li>
+
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a 
+                    {% if request.path == "/" %}
+                        class="nav-link active" 
+                    {% else %}
+                    class="nav-link"
+                    {% endif %}
+                    aria-current="page" href="{% url 'create-blog' %}"><i class="fa-solid fa-pen-clip"></i> Create Blog</a>
+                </li>
+                {% endif %}
+
                 <li class="nav-item">
                     <a 
                     {% if request.path == "/contact_us/" %}
