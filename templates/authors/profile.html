@@ -66,13 +66,13 @@
                     <p class="text-end"><i class="fa-solid fa-clock"></i> {{post_data.post_date|timesince}}</p>
                 </div>
             </div>
-            <footer class="blockquote-footer">{{post_data.description |truncatewords:20}}</footer>
+            <footer class="blockquote-footer">{{post_data.mini_description |truncatewords:50}}</footer>
         </blockquote>
     </div>
     <div class="card-footer">
         <a class="btn btn-sm btn-primary" href="{% url 'blog_detail' post_data.slug %}"><i class="fa-brands fa-readme"></i> Read Blog</a>
-        <a class="btn btn-sm btn-info" href="#"><i class="fa-solid fa-pen-to-square"></i> Edit Blog</a>
-        <a class="btn btn-sm btn-danger" href="#"> <i class="fa-solid fa-trash"></i>Delete Blog</a>
+        <a class="btn btn-sm btn-info" href="{% url 'UpdateBlogView' post_data.id %}"><i class="fa-solid fa-pen-to-square"></i> Edit Blog</a>
+        <a class="btn btn-sm btn-danger" href="{% url 'DeleteBlogView' post_data.id %}"> <i class="fa-solid fa-trash"></i>Delete Blog</a>
     </div>
 </div>
 {% endfor %}
