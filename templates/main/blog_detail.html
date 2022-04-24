@@ -13,7 +13,7 @@
             <div>
                 {% if user.is_authenticated %}
                     {% if user.id == blog.author.id %}
-                    <a class="btn btn-sm btn-info" href="#"><i class="fa-solid fa-pen-to-square"></i> Edit Blog</a>
+                    <a class="btn btn-sm btn-info" href="{% url 'UpdateBlogView' blog.id %}"><i class="fa-solid fa-pen-to-square"></i> Edit Blog</a>
                     <a class="btn btn-sm btn-danger" href="#"> <i class="fa-solid fa-trash"></i> Delete Blog</a>
                     {% endif %}
                 {% endif %}
