@@ -5,6 +5,7 @@
 
 <form method="post">
     {% csrf_token %}
+    {{ form.media }}
     {{form.as_p}}
     <button type="submit">Post blog</button>
 </form>

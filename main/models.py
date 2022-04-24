@@ -2,12 +2,13 @@ from django.db import models
 from django.contrib.auth.models import User
 from datetime import date
 from django.template.defaultfilters import slugify
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 class Blog(models.Model):
     name = models.CharField(max_length=100)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    description = models.TextField(help_text="Write your blog")
+    description = RichTextField()
     post_date = models.DateField(default=date.today)
     slug = models.CharField(max_length=1000, null=True, blank=True)
 

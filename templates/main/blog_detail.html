@@ -19,11 +19,8 @@
                 {% endif %}
             </div>
 
-            <img src="https://images.pexels.com/photos/11013073/pexels-photo-11013073.jpeg?cs=srgb&dl=pexels-anil-singh-11013073.jpg&fm=jpg"
-                alt="" width="40%">
-
             <div>
-                <p>{{blog.description}}</p>
+                <p>{{blog.description|safe}}</p>
             </div>
         </div>
         <div class="col-md-4">
