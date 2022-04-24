@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    {% if user.id == blog.author.id %}
+        <h2>Delete: {{blog.name}}</h2>
+
+        <form method="post">
+            {% csrf_token %}
+            <strong>Are you sure you want to delete this blog ??</strong>
+            <br>
+            <button type="submit" class="btn btn-danger">Delete Blog</button>
+        </form>
+        {% else %}
+        <strong class="text-danger">You are not allowed hare?</strong>
+    {% endif %}
+    {% else %}
+    <strong class="text-danger">You are not logged in please create or login in website</strong>
+{% endif %}
+{% endblock content %}
