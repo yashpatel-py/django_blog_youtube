@@ -3,19 +3,23 @@
 {% block content %}
     <h1 class="red_color">Blog Home</h1>
     <div class="row">
-        {% for data in object_list %}
-        <div class="col-sm-6 mt-1">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">{{ data.name }}</h5>
-                    <span class="badge bg-success">{{data.author}}</span>
-                    <p class="card-text">
-                        {{data.description| truncatechars:200|safe}}
-                    </p>
-                    <a href="{% url 'blog_detail' data.slug %}" class="btn btn-primary">Read More</a>
+        {% if object_list %}
+            {% for data in object_list %}
+            <div class="col-sm-6 mt-1">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ data.name }}</h5>
+                        <span class="badge bg-success">{{data.author}}</span>
+                        <p class="card-text">
+                            {{data.mini_description| truncatechars:200}}
+                        </p>
+                        <a href="{% url 'blog_detail' data.slug %}" class="btn btn-primary">Read More</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        {% endfor %}
+            {% endfor %}
+        {% else %}
+            <h2 class="text-danger text-center">No blog found</h2>
+        {% endif %}
     </div>
 {% endblock content %}

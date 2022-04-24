@@ -9,6 +9,7 @@ class Blog(models.Model):
     name = models.CharField(max_length=100)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     description = RichTextField()
+    mini_description = models.TextField()
     post_date = models.DateField(default=date.today)
     slug = models.CharField(max_length=1000, null=True, blank=True)
 
