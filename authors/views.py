@@ -13,26 +13,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 
-# Create your views here.
-# def signUp(request):
-#     if request.method == "POST":
-#         form = SignupForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request, "Your account is created successfully")
-#             new_user = authenticate(
-#                 username = form.cleaned_data['username'],
-#                 password = form.cleaned_data['password1']
-#             )
-
-#             login(request, new_user)
-#             return redirect('home')
-#         else:
-#             messages.error(request, "Error")
-#     else:
-#         form = SignupForm()
-#     return render(request, "authors/register.html", {'form': form})
-
 class signUp(SuccessMessageMixin, generic.CreateView):
     form_class = SignupForm
     template_name = "authors/register.html"
@@ -42,27 +22,6 @@ class signUp(SuccessMessageMixin, generic.CreateView):
     def form_invalid(self, form):
         messages.add_message(self.request, messages.ERROR, "Please enter details properly")
         return redirect('home')
-
-# def logIn(request):
-#     if request.method == "POST":
-#         form = LoginUserForm(request, data = request.POST)
-#         if form.is_valid():
-#             username = form.cleaned_data.get('username')
-#             password = form.cleaned_data.get('password')
-
-#             user = authenticate(username = username, password=password)
-
-#             if user is not None:
-#                 login(request, user)
-#                 messages.success(request, f"You are logged in as {username}")
-#                 return redirect('home')
-#             else:
-#                 messages.error(request, "Error")
-#         else:
-#             messages.error(request, "Username or password incorrect")
-#     form = LoginUserForm()
-#     return render(request, "authors/login.html", {"login_form": form})
-
 class logIn(generic.View):
     form_class = LoginUserForm
     template_name = "authors/login.html"
@@ -90,27 +49,12 @@ class logIn(generic.View):
                 messages.error(request, "Username or password incorrect")
         form = LoginUserForm()
         return render(request, "authors/login.html", {"form": form})
-
-# def logOut(request):
-#     logout(request)
-#     messages.success(request, "You have successfully logged out.")
-#     return redirect('home')
-
 class logOut(LoginRequiredMixin, generic.View):
     login_url = 'login'
     def get(self, request):
         logout(request)
         messages.success(request, "User logged out")
         return redirect('home')
-
-# @login_required(login_url="login")
-# def profile(request, user_name):
-#     user_related_data = Blog.objects.filter(author__username = user_name)
-#     context = {
-#         "user_related_data": user_related_data
-#     }
-#     return render(request, "authors/profile.html", context)
-
 class profile(LoginRequiredMixin, generic.View):
     model = Blog
     login_url = 'login'
