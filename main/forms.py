@@ -1,5 +1,6 @@
+from turtle import width
 from django import forms
-from .models import Contact, Blog
+from .models import BlogComment, Contact, Blog
 from ckeditor.widgets import CKEditorWidget
 
 class ContactForm(forms.ModelForm):
@@ -35,4 +36,16 @@ class UpdateBlogForm(forms.ModelForm):
         widgets = {
             'author': forms.TextInput(attrs={'value': '', 'id':'author', 'type':'hidden'}),
             'mini_description': forms.Textarea(attrs={'class': 'form-control'})
+        }
+        
+
+class CommentBlogForm(forms.ModelForm):
+    class Meta:
+        model = BlogComment
+        fields = "__all__"
+        
+        widgets = {
+            'author': forms.TextInput(attrs={'value': '', 'id':'author', 'type':'hidden'}),
+            'blog': forms.TextInput(attrs={'value': '', 'id':'blog', 'type':'hidden'}),
+            'description': forms.Textarea(attrs={'class': 'form-control'}),
         }

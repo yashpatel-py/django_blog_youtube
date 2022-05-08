@@ -1,7 +1,7 @@
 from pyexpat import model
 from django.shortcuts import redirect, render
 from .models import Blog, BlogComment, Contact
-from .forms import ContactForm, CreateBlogForm, UpdateBlogForm
+from .forms import ContactForm, CreateBlogForm, UpdateBlogForm, CommentBlogForm
 from django.contrib import messages
 from django.views import generic
 from django.contrib.messages.views import SuccessMessageMixin
@@ -14,9 +14,21 @@ class blog_home(generic.ListView):
 def blog_detail(request, slug):
     blog = Blog.objects.get(slug=slug)
     all_blogs = Blog.objects.all().order_by('-post_date')[:10]
+    
+    form = CommentBlogForm()
+    if request.method == "POST":
+        form = CommentBlogForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your comment on this blog has been posted")
+            return redirect("/blog_detail/"+blog.slug)
+    else:
+        form = CommentBlogForm()
+    
     context = {
         'blog':blog,
-        'all_blogs': all_blogs
+        'all_blogs': all_blogs,
+        'form': form
     }
     return render(request, "main/blog_detail.html", context)
 
