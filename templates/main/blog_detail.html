@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load humanize %}
+
 {% block content %}
 <dev class="container">
     <div class="row">
@@ -24,13 +26,39 @@
             </div>
 
             <div class="col">
-                <h3>Write your comment...</h3>
-                <form method="post">
-                    {% csrf_token %}
-                    {{form.as_p}}
+                <h3>Comments ({{all_comments.count}})</h3>
 
-                    <button type="submit" class="btn btn-outline-primary">Comment</button>
-                </form>
+                {% for comment in all_comments %}
+                    <div class="card mb-2">
+                        <div class="card-header">
+                            {{ comment.author }} <br>
+                            {{ comment.comment_date| timesince }} ago
+                        </div>
+
+                        <div class="card-body">
+                            <blockquote class="blockquote mt-2">
+                                <p>{{ comment.description }}</p>
+                            </blockquote>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="col">
+                {% if user.is_authenticated %}
+                    {% if blog.author.id == user.id %}
+                        <h3 class="text-center text-warning">You are not allowed to post comment on your own blog</h3>
+                    {% else %}
+                    <h3>Write your comment...</h3>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        <button type="submit" class="btn btn-outline-primary">Comment</button>
+                    </form>
+                    {% endif %}
+                {% else %}
+                    <h2 class="text-center text-danger">Please Login to comment on this post <a href="{% url 'login' %}">Login</a></h2>
+                {% endif %}
             </div>
         </div>
         <div class="col-md-4">
