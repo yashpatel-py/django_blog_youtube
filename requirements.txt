@@ -1,0 +1,7 @@
+asgiref==3.5.2
+Django==4.0.6
+django-ckeditor==6.4.2
+django-js-asset==2.0.0
+fontawesomefree==6.1.1
+sqlparse==0.4.2
+tzdata==2022.1
