@@ -1,4 +1,3 @@
-from turtle import width
 from django import forms
 from .models import BlogComment, Contact, Blog
 from ckeditor.widgets import CKEditorWidget
