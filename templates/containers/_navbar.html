@@ -43,13 +43,25 @@
         </div>
         <ul class="navbar-nav mb-2 mb-lg-0">
             {% if user.is_authenticated %}
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'profile' user.username %}"><i class="fa-solid fa-user"></i> {{user.username}}</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{% url 'logout' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
-            </li>
-
+            <div class="btn-group dropstart">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-user"></i> {{user.username}}
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                    <li>
+                        <a class="dropdown-item" href="{% url 'profile' user.username %}">
+                            {{user.first_name}} {{user.last_name}} <br> @{{user.username}}
+                        </a>
+                    </li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        <a class="dropdown-item" href="{% url 'user_public_details' user.id %}">Update Public Details</a>
+                    </li>
+                    <li><a class="dropdown-item" href="#">Action three</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="{% url 'logout' %}">Sign out</a></li>
+                </ul>
+              </div>
             {% else %}
             <li class="nav-item">
                 <a 

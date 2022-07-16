@@ -14,6 +14,8 @@ class UserProfuile(models.Model):
     website = models.URLField(blank=True)
     github = models.URLField(blank=True)
     twitter = models.URLField(blank=True)
+    education = models.TextField(blank=True)
+    work = models.TextField(blank=True)
 
     def __str__(self):
         return f"{self.user.username}'s profile"

@@ -1,6 +1,12 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm, UserChangeForm
 from django.contrib.auth.models import User
+from .models import UserProfuile
+
+class UserPublicDetailsForm(forms.ModelForm):
+    class Meta:
+        model = UserProfuile
+        fields = "__all__"
 
 class LoginUserForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):

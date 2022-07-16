@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Update user</h2>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {{form.as_p}}
+
+    <br>
+    <button class="btn btn-lg btn-success" type="submit">Update user</button>
+</form>
+{% endblock content %}

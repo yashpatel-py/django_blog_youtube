@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.urls import reverse_lazy
-from .forms import SignupForm, LoginUserForm, PasswordChangingForm, EditUserProfileForm
+from .forms import SignupForm, LoginUserForm, PasswordChangingForm, EditUserProfileForm, UserPublicDetailsForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import PasswordChangeView
 from main.models import Blog
@@ -107,3 +107,18 @@ class DeleteUser(LoginRequiredMixin, SuccessMessageMixin, generic.DeleteView):
     template_name = 'authors/delete_user_confirm.html'
     success_message = "User has been deleted"
     success_url = reverse_lazy('home')
+
+
+class UpdatePublicDetails(LoginRequiredMixin, SuccessMessageMixin, generic.UpdateView):
+    login_url = "login"
+    form_class = UserPublicDetailsForm
+    template_name = "authors/edit_public_details.html"
+    success_url = reverse_lazy('home')
+    success_message = "User updated"
+
+    def get_object(slef):
+        return slef.request.user.userprofuile
+
+    def form_invalid(self, form):
+        messages.add_message(self.request, messages.ERROR, "Please submit the form carefully")
+        return redirect('home')
