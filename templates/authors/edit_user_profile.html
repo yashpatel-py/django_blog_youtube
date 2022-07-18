@@ -3,12 +3,19 @@
 {% block content %}
 <h2>Update user</h2>
 
-<form method="post">
-    {% csrf_token %}
-
-    {{form}}
-
-    <br>
-    <button class="btn btn-lg btn-success" type="submit">Update user</button>
-</form>
+<div class="row">
+    <div class="col-md-3">
+        {% include 'containers/_sideNavBar.html' %}
+    </div>
+    <div class="col-md-9">
+        <form method="post">
+            {% csrf_token %}
+        
+            {{form}}
+        
+            <br>
+            <button class="btn btn-lg btn-success" type="submit">Update user</button>
+        </form>
+    </div>
+</div>
 {% endblock content %}

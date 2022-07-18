@@ -4,6 +4,24 @@ from django.contrib.auth.models import User
 from .models import UserProfuile
 
 class UserPublicDetailsForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['user'].widget.attrs.update({
+            'hidden': "hidden"
+        })
+
+        self.fields['bio'].widget.attrs.update({
+            "rows": "3"
+        })
+
+        self.fields['education'].widget.attrs.update({
+            "rows": "3"
+        })
+        self.fields['work'].widget.attrs.update({
+            "rows": "3"
+        })
+
     class Meta:
         model = UserProfuile
         fields = "__all__"

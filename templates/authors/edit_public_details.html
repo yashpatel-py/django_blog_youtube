@@ -1,14 +1,77 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block content %}
 <h2>Update user</h2>
 
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
+<div class="row">
+    <div class="col-md-3">
+        {% include 'containers/_sideNavBar.html' %}
+    </div>
+    <div class="col-md-9">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
 
-    {{form.as_p}}
+            <div class="card">
+                <div class="card-header">
+                    <h2>General Info</h2>
+                </div>
+                <div class="card-body">
+                    <div class="col">
+                        {{form.user}}
+                    </div>
+                    <div class="col">
+                        {{form.bio|as_crispy_field}}
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            {{form.location|as_crispy_field}}
+                        </div>
+                        <div class="col">
+                            {{form.dob|as_crispy_field}}
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-    <br>
-    <button class="btn btn-lg btn-success" type="submit">Update user</button>
-</form>
+            <div class="card mt-2">
+                <div class="card-header">
+                    <h2>Education/Work</h2>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            {{form.education|as_crispy_field}}
+                        </div>
+                        <div class="col">
+                            {{form.work|as_crispy_field}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-2">
+                <div class="card-header">
+                    <h2>Socual Links</h2>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            {{form.website|as_crispy_field}}
+                        </div>
+                        <div class="col">
+                            {{form.github|as_crispy_field}}
+                        </div>
+                        <div>
+                            {{form.twitter|as_crispy_field}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <button class="btn btn-lg btn-success" type="submit">Update user</button>
+        </form>
+    </div>
+</div>
 {% endblock content %}

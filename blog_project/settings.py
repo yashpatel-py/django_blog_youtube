@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'fontawesomefree',
     'ckeditor',
     'ckeditor_uploader',
+    'crispy_forms',
+    "crispy_bootstrap5",
     "django.contrib.humanize",
     'django.contrib.admin',
     'django.contrib.auth',
@@ -57,6 +59,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'blog_project.urls'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 TEMPLATES = [
     {
