@@ -9,6 +9,7 @@ from django.views import generic
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import UserProfuile
 
 
 class signUp(SuccessMessageMixin, generic.CreateView):
@@ -69,8 +70,10 @@ class profile(LoginRequiredMixin, generic.View):
 
     def get(self, request, user_name):
         user_related_data = Blog.objects.filter(author__username=user_name)
+        user_profile_data = UserProfuile.objects.get(user=request.user.id)
         context = {
-            "user_related_data": user_related_data
+            "user_related_data": user_related_data,
+            'user_profile_data': user_profile_data
         }
         return render(request, self.template_name, context)
 

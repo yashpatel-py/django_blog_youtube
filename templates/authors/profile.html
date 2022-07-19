@@ -2,52 +2,63 @@
 {% load humanize %}
 
 {% block content %}
-<div class="card border-success mb-3"">
-    <div class=" card-header bg-transparent border-success fs-4">{{user.username}}'s Profile</div>
-<div class="card-body">
-    <!-- Check Username -->
-    {% if user.username %}
-    <p class="card-text">Username: {{user.username}}</p>
-    {% else %}
-    <div class="alert alert-warning" role="alert">
-        <b>Username</b> is not provided by user
-    </div>
-    {% endif %}
+<h2 class="fw-bolder">Hello, <span class="text-primary">{{user.username}}!!</span></h2>
 
-    <!--check first_name-->
-    {% if user.first_name %}
-        p class="card-text">First Name: {{user.first_name}}</p>
-    {% else %}
-    <div class="alert alert-warning" role="alert">
-        <b>First name</b> is not provided by user
-    </div>
-    {% endif %}
+<div class="card">
+    <div class="card-body text-center">
+        {% if user_profile_data.profile_image %}
+            <img class="rounded" src="{{user_profile_data.profile_image.url}}" alt="{{user.username}}'s profile image" width="10%" height="10%">
+        {% else %}
+            <img class="rounded" src="https://www.w3schools.com/howto/img_avatar.png" alt="{{user.username}}'s profile image" width="10%" height="10%">
+        {% endif %}
 
-    <!-- Last name -->
-    {% if user.last_name %}
-    <p class="card-text">First Name: {{user.last_name}}</p>
-    {% else %}
-    <div class="alert alert-warning" role="alert">
-        <b>Last name</b> is not provided by user
-    </div>
-    {% endif %}
+        <h3 class="fs-1 fw-bolder mt-3">{{user.first_name}} {{user.last_name}} (@{{user.username}})</h3>
 
-    <!-- check Email -->
+        {% if user_profile_data.bio %}
+            <p>{{user_profile_data.bio}}</p>
+        {% else %}
+            <p><span class="text-danger">404</span> dio not found</p>
+        {% endif %}
 
-    {% if user.email %}
-    <p class="card-text">Email: {{user.email}}</p>
-    {% else %}
-    <div class="alert alert-warning" role="alert">
-        <b>Email</b> is not provided by user
+        <div class="fs-5">
+            {% if user_profile_data.location %}
+                <span class="me-3"><i class="fa-solid fa-location-pin text-primary"></i> {{user_profile_data.location}}</span>
+            {% endif %}
+
+            {% if user_profile_data.dob %}
+                <span class="me-3"><i class="fa-solid fa-cake-candles text-primary"></i> {{user_profile_data.dob}}</span>
+            {% endif %}
+
+            {% if user.email %}
+                <span class="me-5"><i class="fa-solid fa-envelope text-primary"></i> {{user.email}}</span>
+            {% endif %}
+
+            {% if user_profile_data.website %}
+                <a class="me-2" href="{{user_profile_data.website}}"><i class="fa-solid fa-earth-americas"></i></a>
+            {% endif %}
+
+            {% if user_profile_data.github %}
+                <a class="me-2" href="{{user_profile_data.github}}"><i class="fa-brands fa-github"></i></a>
+            {% endif %}
+
+            {% if user_profile_data.twitter %}
+                <a class="me-2" href="{{user_profile_data.twitter}}"><i class="fa-brands fa-twitter"></i></a>
+            {% endif %}
+        </div>
     </div>
-    {% endif %}
+    <div class="card-footer text-center">
+        <div class="row">
+            <div class="col-md-6">
+                <h5 class="fw-bold">Education</h5>
+                <p>{{user_profile_data.education}}</p>
+            </div>
+            <div class="col-md-6">
+                <h5 class="fw-bold">Work</h5>
+                <p>{{user_profile_data.work}}</p>
+            </div>
+        </div>
+    </div>
 </div>
-<div class="card-footer bg-transparent border-success">
-    
-</div>
-</div>
-
-<hr>
 
 <h3>My Posts</h3>
 
