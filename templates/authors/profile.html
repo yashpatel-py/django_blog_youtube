@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load humanize %}
 
+{% block title %}{{user.username}}'s Profile{% endblock title %}
+
 {% block content %}
 <h2 class="fw-bolder">Hello, <span class="text-primary">{{user.username}}!!</span></h2>
 
