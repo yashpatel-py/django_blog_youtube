@@ -69,7 +69,7 @@ class profile(LoginRequiredMixin, generic.View):
     template_name = "authors/profile.html"
 
     def get(self, request, user_name):
-        user_related_data = Blog.objects.filter(author__username=user_name)
+        user_related_data = Blog.objects.filter(author__username=user_name)[:6]
         user_profile_data = UserProfuile.objects.get(user=request.user.id)
         context = {
             "user_related_data": user_related_data,

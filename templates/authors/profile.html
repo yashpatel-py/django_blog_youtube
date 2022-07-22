@@ -7,42 +7,45 @@
 <div class="card">
     <div class="card-body text-center">
         {% if user_profile_data.profile_image %}
-            <img class="rounded" src="{{user_profile_data.profile_image.url}}" alt="{{user.username}}'s profile image" width="10%" height="10%">
+        <img class="rounded" src="{{user_profile_data.profile_image.url}}" alt="{{user.username}}'s profile image"
+            width="10%" height="10%">
         {% else %}
-            <img class="rounded" src="https://www.w3schools.com/howto/img_avatar.png" alt="{{user.username}}'s profile image" width="10%" height="10%">
+        <img class="rounded" src="https://www.w3schools.com/howto/img_avatar.png"
+            alt="{{user.username}}'s profile image" width="10%" height="10%">
         {% endif %}
 
         <h3 class="fs-1 fw-bolder mt-3">{{user.first_name}} {{user.last_name}} (@{{user.username}})</h3>
 
         {% if user_profile_data.bio %}
-            <p>{{user_profile_data.bio}}</p>
+        <p>{{user_profile_data.bio}}</p>
         {% else %}
-            <p><span class="text-danger">404</span> dio not found</p>
+        <p><span class="text-danger">404</span> dio not found</p>
         {% endif %}
 
         <div class="fs-5">
             {% if user_profile_data.location %}
-                <span class="me-3"><i class="fa-solid fa-location-pin text-primary"></i> {{user_profile_data.location}}</span>
+            <span class="me-3"><i class="fa-solid fa-location-pin text-primary"></i>
+                {{user_profile_data.location}}</span>
             {% endif %}
 
             {% if user_profile_data.dob %}
-                <span class="me-3"><i class="fa-solid fa-cake-candles text-primary"></i> {{user_profile_data.dob}}</span>
+            <span class="me-3"><i class="fa-solid fa-cake-candles text-primary"></i> {{user_profile_data.dob}}</span>
             {% endif %}
 
             {% if user.email %}
-                <span class="me-5"><i class="fa-solid fa-envelope text-primary"></i> {{user.email}}</span>
+            <span class="me-5"><i class="fa-solid fa-envelope text-primary"></i> {{user.email}}</span>
             {% endif %}
 
             {% if user_profile_data.website %}
-                <a class="me-2" href="{{user_profile_data.website}}"><i class="fa-solid fa-earth-americas"></i></a>
+            <a class="me-2" href="{{user_profile_data.website}}"><i class="fa-solid fa-earth-americas"></i></a>
             {% endif %}
 
             {% if user_profile_data.github %}
-                <a class="me-2" href="{{user_profile_data.github}}"><i class="fa-brands fa-github"></i></a>
+            <a class="me-2" href="{{user_profile_data.github}}"><i class="fa-brands fa-github"></i></a>
             {% endif %}
 
             {% if user_profile_data.twitter %}
-                <a class="me-2" href="{{user_profile_data.twitter}}"><i class="fa-brands fa-twitter"></i></a>
+            <a class="me-2" href="{{user_profile_data.twitter}}"><i class="fa-brands fa-twitter"></i></a>
             {% endif %}
         </div>
     </div>
@@ -60,29 +63,71 @@
     </div>
 </div>
 
-<h3>My Posts</h3>
 
-{% for post_data in user_related_data %}
-<div class="card mt-1">
-    <div class="card-body">
-        <blockquote class="blockquote mb-0">
-            <div class="row">
-                <div class="col-md-6">
-                    <p>{{post_data.name}}</p>
-                </div>
 
-                <div class="col-md-6">
-                    <p class="text-end"><i class="fa-solid fa-clock"></i> {{post_data.post_date|timesince}}</p>
-                </div>
+<!-- ======================================================== -->
+
+
+<div class="row mt-2">
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-header">
+                <h4>Currently learning</h4>
             </div>
-            <footer class="blockquote-footer">{{post_data.mini_description |truncatewords:50}}</footer>
-        </blockquote>
+            <div class="card-body">
+                <p>Currently i am learning react-js</p>
+            </div>
+        </div>
+        <div class="card mt-2">
+            <div class="card-header">
+                <h4>Skills/Languages</h4>
+            </div>
+            <div class="card-body">
+                <p>Django, Python</p>
+            </div>
+        </div>
+        <div class="card mt-2">
+            <div class="card-header">
+                <h4>Currently hacking on</h4>
+            </div>
+            <div class="card-body">
+                <p>Currently i am learning react-js</p>
+            </div>
+        </div>
+        <div class="card mt-2">
+            <div class="card-body">
+                <p>{{user_related_data.count}} - Posts</p>
+            </div>
+        </div>
     </div>
-    <div class="card-footer">
-        <a class="btn btn-sm btn-primary" href="{% url 'blog_detail' post_data.slug %}"><i class="fa-brands fa-readme"></i> Read Blog</a>
-        <a class="btn btn-sm btn-info" href="{% url 'UpdateBlogView' post_data.id %}"><i class="fa-solid fa-pen-to-square"></i> Edit Blog</a>
-        <a class="btn btn-sm btn-danger" href="{% url 'DeleteBlogView' post_data.id %}"> <i class="fa-solid fa-trash"></i>Delete Blog</a>
+
+    <div class="col-md-9">
+        {% for post_data in user_related_data %}
+        <div class="card">
+            <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>{{post_data.name}}</p>
+                        </div>
+
+                        <div class="col-md-6">
+                            <p class="text-end"><i class="fa-solid fa-clock"></i> {{post_data.post_date|timesince}}</p>
+                        </div>
+                    </div>
+                    <footer class="blockquote-footer">{{post_data.mini_description |truncatewords:50}}</footer>
+                </blockquote>
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-sm btn-primary" href="{% url 'blog_detail' post_data.slug %}"><i
+                        class="fa-brands fa-readme"></i> Read Blog</a>
+                <a class="btn btn-sm btn-info" href="{% url 'UpdateBlogView' post_data.id %}"><i
+                        class="fa-solid fa-pen-to-square"></i> Edit Blog</a>
+                <a class="btn btn-sm btn-danger" href="{% url 'DeleteBlogView' post_data.id %}"> <i
+                        class="fa-solid fa-trash"></i>Delete Blog</a>
+            </div>
+        </div>
+        {% endfor %}
     </div>
 </div>
-{% endfor %}
 {% endblock content %}
