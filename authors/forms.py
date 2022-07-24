@@ -10,9 +10,26 @@ class UserPublicDetailsForm(forms.ModelForm):
         self.fields['user'].widget.attrs.update({
             'hidden': "hidden"
         })
+        
+        self.fields['user'].widget.attrs.update({
+            'hidden': "hidden"
+        })
 
         self.fields['bio'].widget.attrs.update({
             "rows": "3"
+        })
+
+        self.fields['currently_hacking_on'].widget.attrs.update({
+            "rows": "2"
+        })
+
+        self.fields['currently_learning'].widget.attrs.update({
+            "rows": "2"
+        })
+
+        self.fields['skills_language'].widget.attrs.update({
+            "rows": "2",
+            "placeholder": "eg: django, python, java, javascript"
         })
 
         self.fields['education'].widget.attrs.update({
