@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from .forms import SignupForm, LoginUserForm, PasswordChangingForm, EditUserProfileForm, UserPublicDetailsForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import PasswordChangeView
-from main.models import Blog
+from main.models import Blog, BlogComment
 from django.views import generic
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.models import User
@@ -125,3 +125,16 @@ class UpdatePublicDetails(LoginRequiredMixin, SuccessMessageMixin, generic.Updat
     def form_invalid(self, form):
         messages.add_message(self.request, messages.ERROR, "Please submit the form carefully")
         return redirect('home')
+
+class Dashboard(LoginRequiredMixin ,generic.View):
+    login_url = "login"
+
+    def get(self, request):
+        user_related_data = Blog.objects.filter(author__username = request.user.username)
+        user_comments = BlogComment.objects.filter(author__username = request.user.username)
+
+        context = {
+            'user_related_data': user_related_data,
+            'user_comments': user_comments
+        }
+        return render(request, "authors/dashboard.html", context)
