@@ -1,4 +1,3 @@
-from pyexpat import model
 from django.shortcuts import redirect, render
 from .models import Blog, BlogComment, Contact
 from .forms import ContactForm, CreateBlogForm, UpdateBlogForm, CommentBlogForm
@@ -9,6 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 class blog_home(generic.ListView):
     model = Blog
+    paginate_by = 10
     template_name = "main/blog_home.html"
 
 def blog_detail(request, slug):

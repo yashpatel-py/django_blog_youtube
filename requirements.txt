@@ -1,11 +1,16 @@
 asgiref==3.5.2
 autopep8==1.6.0
+bleach==5.0.1
+crispy-bootstrap5==0.6
 Django==4.0.6
-django-ckeditor==6.4.2
+django-ckeditor==6.5.0
+django-crispy-forms==1.14.0
 django-js-asset==2.0.0
 fontawesomefree==6.1.1
 Pillow==9.2.0
 pycodestyle==2.8.0
+six==1.16.0
 sqlparse==0.4.2
 toml==0.10.2
 tzdata==2022.1
+webencodings==0.5.1

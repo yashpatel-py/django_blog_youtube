@@ -29,7 +29,7 @@
 
     <div class="row mt-2">
         <div class="col-md-12">
-            {% for post_data in user_related_data %}
+            {% for post_data in page_obj %}
             <div class="card">
                 <div class="card-body">
                     <blockquote class="blockquote mb-0">
@@ -56,6 +56,33 @@
             </div>
             {% endfor %}
         </div>
+    </div>
+    <div class="mt-5">
+        <nav aria-label="Page navigation example">
+            
+            <ul class="pagination justify-content-between">
+               
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{page_obj.previous_page_number}}">Previous</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link">Previous</a>
+                    </li>
+                {% endif %}
+    
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{page_obj.next_page_number}}">Next</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link">Next</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
     </div>
 </div>
 {% endblock content %}

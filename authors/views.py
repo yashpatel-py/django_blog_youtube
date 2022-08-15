@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render
+from django.core.paginator import Paginator
 from django.contrib import messages
 from django.urls import reverse_lazy
 from .forms import SignupForm, LoginUserForm, PasswordChangingForm, EditUserProfileForm, UserPublicDetailsForm
@@ -133,8 +134,13 @@ class Dashboard(LoginRequiredMixin ,generic.View):
         user_related_data = Blog.objects.filter(author__username = request.user.username)
         user_comments = BlogComment.objects.filter(author__username = request.user.username)
 
+        paginator = Paginator(user_related_data, 10)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
         context = {
             'user_related_data': user_related_data,
+            'page_obj': page_obj,
             'user_comments': user_comments
         }
         return render(request, "authors/dashboard.html", context)
